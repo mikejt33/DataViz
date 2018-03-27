@@ -134,17 +134,12 @@ shinyApp(ui = ui, server = server)
 
 ```
 
+## Step 3: Have the app Visualize this data using Barcharts:
+Advanced - do this in ggplot
 
-```{r cars}
+## Step 4: Make sure the app is interpretable
+Label axis, Title, quick description of what you're visualizing
 
-```
+## Step 5:  Add a new tab:
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Step 6: Locate all the cities on a geograpical map
