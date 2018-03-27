@@ -53,7 +53,7 @@ shinyServer(function(input, output) {
     mx <- t(as.matrix(result[-1]))
     colours = c("red","blue") 
     
-    ggplot(data =mx,aes(x)
+    #ggplot(data =mx,aes(x))
     
     barplot(mx, beside = TRUE,col = colours)
     print(result)
