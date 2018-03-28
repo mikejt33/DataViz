@@ -10,9 +10,10 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE, fig.show = "animate")
 ```
 
 ```{r}
-#devtools::install_github("dgrtwo/gganimate")
-#devtools::install_github("yihui/animation")
-#install.packages('animation')
+devtools::install_github("dgrtwo/gganimate")
+install.packages('animation')
+devtools::install_github("yihui/animation")
+
 library(ggplot2)
 library(animation)
 library(gganimate)
@@ -23,7 +24,7 @@ library(gganimate)
 FL_data <- read.csv("2017FL_performance.csv")
 FL_data$AIRLINE_ID <- factor(FL_data$AIRLINE_ID)
 str(FL_data)
-head(FL_dep)
+#head(FL_dep)
 FL_dep <- FL_data[grep("FL", FL_data$ORIGIN_CITY_NAME), ]
 FL_arr <- FL_data[grep("FL", FL_data$DEST_CITY_NAME), ]
 
@@ -47,6 +48,7 @@ p1 <- ggplot(FL_arr, aes(AIRLINE_ID, ARR_DELAY, size = ARR_DELAY, color = AIRLIN
   geom_path(aes(cumulative = FALSE, group = AIRLINE_ID))
  
 gganimate(p1)
+gganimate(p1, "output.gif")
 ```
 
 # bar
