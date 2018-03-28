@@ -106,10 +106,15 @@ plot(as.ts(decompose_air$random))
 plot(decompose_air)
 ```
 
+```{r}
+# simple moving average for monthly data
+moving_ave <- function(x,n=5){stats::filter(x,rep(1/n,n), sides=2)}
 
 
+trend <- moving_ave(as.ts(arr_delay$AVE_DELAY),30)
+plot(as.ts(arr_delay$AVE_DELAY))
+plot(trend)
 
-
-
+```
 
 

@@ -1,0 +1,66 @@
+---
+title: "ggplot2"
+author: "Xiaotai Chai"
+date: "3/3/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, fig.show = "animate")
+```
+
+```{r}
+#devtools::install_github("dgrtwo/gganimate")
+#devtools::install_github("yihui/animation")
+#install.packages('animation')
+library(ggplot2)
+library(animation)
+library(gganimate)
+```
+
+# Read in the month data
+```{r}
+FL_data <- read.csv("2017FL_performance.csv")
+FL_data$AIRLINE_ID <- factor(FL_data$AIRLINE_ID)
+str(FL_data)
+head(FL_dep)
+FL_dep <- FL_data[grep("FL", FL_data$ORIGIN_CITY_NAME), ]
+FL_arr <- FL_data[grep("FL", FL_data$DEST_CITY_NAME), ]
+
+plot(FL_arr$DAY_OF_MONTH, FL_arr$ARR_DELAY)
+delay_data <- aggregate(ARR_DELAY ~ AIRLINE_ID + DAY_OF_MONTH, FL_arr, mean)
+```
+
+# Read in the year data
+```{r}
+flights <- read.csv("flights.csv")
+#str(flights)
+flights$DAY_OF_WEEK <- factor(flights$DAY_OF_WEEK)
+flights <- subset(flights, select = -c(X) )
+```
+
+
+# 
+```{r}
+theme_set(theme_bw())
+p1 <- ggplot(FL_arr, aes(AIRLINE_ID, ARR_DELAY, size = ARR_DELAY, color = AIRLINE_ID, frame = DAY_OF_MONTH)) +
+  geom_path(aes(cumulative = FALSE, group = AIRLINE_ID))
+ 
+gganimate(p1)
+```
+
+# bar
+```{r}
+p2 <- ggplot(delay_data, aes(AIRLINE_ID, ARR_DELAY,color = AIRLINE_ID, frame = DAY_OF_MONTH))+
+  geom_bar(stat="identity")
+#p2
+gganimate(p2)
+```
+
+```{r}
+p3 <- ggplot(delay_data, aes(AIRLINE_ID, ARR_DELAY,color = AIRLINE_ID))+
+  geom_boxplot()
+p3
+gganimate(p3)
+```
+
