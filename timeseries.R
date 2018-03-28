@@ -6,6 +6,7 @@ library(forecast)
 flights <- read.csv('data/flights.csv.gz')
 arr_delay <- flights %>% arrange(FL_DATE) %>% group_by(FL_DATE) %>% summarise(mean(ARR_DELAY, na.rm = TRUE))
 names(arr_delay) <- c('FL_DATE', 'AVE_DELAY')
+data(AirPassengers)
 
 ui <- fluidPage(
   fluidRow(
@@ -56,20 +57,15 @@ server <- function(input, output) {
   })
   
   output$plot2 <- renderPlot({
-    ts_air = ts(timeserie_air, frequency = 12)
+    ts_air = ts(AirPassengers, frequency = 12)
     decompose_air = decompose(ts_air, "multiplicative")
-    #obser <- plot(ts_air)
-    #season <- plot(as.ts(decompose_air$seasonal))
-    #tren <- plot(as.ts(decompose_air$trend))
-    #random <- plot(as.ts(decompose_air$random))
     plot_type <- switch(input$decomp,
                    obs = ts_air,
                    trend = as.ts(decompose_air$trend),
                    seas = as.ts(decompose_air$seasonal),
                    rand = as.ts(decompose_air$random),
                    ts_air)
-    plot(plot_type)
-    #autoplot(as.ts(arr_delay$AVE_DELAY)) + xlab("Day of the Year") + ylab("Average Delay")
+    plot(plot_type, ylab="Passengers (Thousands)", xlab="Time (Month)")
   })
 }
 

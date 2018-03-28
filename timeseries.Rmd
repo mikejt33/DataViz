@@ -17,7 +17,7 @@ names(dep_delay) <- c('FL_DATE', 'AVE_DELAY')
 
 plot(as.ts(arr_delay$AVE_DELAY))
 plot(as.ts(arr_delay$AVE_DELAY))
-autoplot(as.ts(arr_delay$AVE_DELAY))# + geom_line()
+#autoplot(as.ts(arr_delay$AVE_DELAY))# + geom_line()
 ```
 
 ```{r}
