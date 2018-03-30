@@ -41,7 +41,7 @@ flights <- subset(flights, select = -c(X) )
 ```
 
 
-# 
+# geom_path
 ```{r}
 theme_set(theme_bw())
 p1 <- ggplot(FL_arr, aes(AIRLINE_ID, ARR_DELAY, size = ARR_DELAY, color = AIRLINE_ID, frame = DAY_OF_MONTH)) +
@@ -59,6 +59,8 @@ p2 <- ggplot(delay_data, aes(AIRLINE_ID, ARR_DELAY,color = AIRLINE_ID, frame = D
 gganimate(p2)
 ```
 
+# geom_boxplot
+gganimate doesn't work well with some geometric objects. geom_boxplot is one of the example. Try different geom objects and see if you can solve the frame object not found error with geom_boxplot.
 ```{r}
 p3 <- ggplot(delay_data, aes(AIRLINE_ID, ARR_DELAY,color = AIRLINE_ID))+
   geom_boxplot()
